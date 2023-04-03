@@ -81,21 +81,23 @@ const confirmarCompra = () => {
 const calcularEnvio = (listaCarrito) => {
     const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0)
     let precioTotal = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0)
-    let envio = 0
+    let envio = 'Gratis'
     const conEnvio = confirm('¿Quiere envío a domicilio?\n\nCon su compra mayor a $20000 es gratis')
 
     if (conEnvio && precioTotal >= 200000) {
         alert('Tiene envío gratis.')
-    } else {
-        envio = 2000
+    } else if (conEnvio && precioTotal < 200000) {
+        envio = '$'+2000
         precioTotal += 2000
         alert('El envío cuesta $2000.')
+    } else {
+        envio = 'Sin envío'
     }
 
     alert('Detalle de su compra:'
         +'\n\n'+listaCarrito.join('\n')
         +'\n\nTotal de productos: '+cantidadTotal
-        +'\n\nEnvio: $'+envio
+        +'\n\nEnvio: '+envio
         +'\n\nEl total a pagar de su compra es: $'+precioTotal
         +'\n\nGracias por su compra!'
     )
