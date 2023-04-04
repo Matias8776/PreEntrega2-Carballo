@@ -24,14 +24,14 @@ const comprarProductos = (listaProductos) => {
 
         const producto = productos.find(producto => producto.nombre.toLowerCase() === productoNombre.toLowerCase());
 
-        if (producto) {
+        if (producto && !Number.isNaN(productoCantidad)) {
             agregarCarrito(producto, producto.id, productoCantidad)
         } else {
-            alert('El producto ingresado es incorrecto.')
+            alert('Ingrese datos validos.')
         }
 
         otroProducto = confirm('Quiere agregar otro producto?');
-    } while (otroProducto)
+    } while (otroProducto || carrito == 0)
 
     confirmarCompra()
 };
@@ -44,7 +44,6 @@ const agregarCarrito = (producto, productoId, productoCantidad) => {
     } else {
         repetido.cantidad += productoCantidad;
     }
-    console.log(carrito)
 }
 
 const eliminarProducto = (productoNombre) => {
